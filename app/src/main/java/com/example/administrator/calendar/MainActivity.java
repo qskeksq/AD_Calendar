@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,10 +19,13 @@ public class MainActivity extends AppCompatActivity {
     Day_Adapter day_adapter;
     TextView textView;
 
+    DayViewDecorator dayViewDecorator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.calendar);
+
 
         // 1.
         gridView = (GridView) findViewById(R.id.grid_day_of_week);
@@ -49,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         gridView.setAdapter(adapter);
         gridView_day.setAdapter(day_adapter);
 
-        TextView textView2 = (TextView) findViewById(R.id.test3);
-
 
         setDate(0, 0);
     }
@@ -59,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // 1일 설정
         Calendar curCal = Calendar.getInstance();  // 캘린더 객체 가져오기
 
-        TextView textView2 = (TextView) findViewById(R.id.test2);
         curCal.set(curCal.get(Calendar.YEAR)+a, curCal.get(Calendar.MONTH)+b, 1);  // 년도, 월은 캘린더로, 날짜는 1일로 설정해준다.
-        textView2.setText(curCal.get(Calendar.DAY_OF_WEEK)+"");
         // 1일에서 -1 한 만큼 공백을 더해준다.
         for(int i=0; i < curCal.get(Calendar.DAY_OF_WEEK)-1; i++){
             days.add("");
@@ -70,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         for(int j=0; j < curCal.getActualMaximum(Calendar.DAY_OF_MONTH); j++){
             days.add(""+(j+1));
         }
-
 
     }
 
